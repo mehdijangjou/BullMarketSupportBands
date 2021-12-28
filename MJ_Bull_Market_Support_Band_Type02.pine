@@ -1,0 +1,25 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// Author: Mehdi Jangjou
+// © mehdijangjou
+
+//Description: Best Performance on Weekly Timeframes in Crypto Market
+//             Also, this support band works best in detecting Bear Market
+
+//@version=5
+indicator(title='MehdiJangjou - BullMarket Support Type 2', shorttitle='MJ Bull Support 2', overlay=true)
+
+// Calculate moving averages
+fastMA = ta.ema(close, 21)
+slowMA = ta.ema(close, 34)
+
+//Colors
+fastMA_color = color.new(color.green, 35)
+slowMA_color = color.new(color.red, 35)
+
+// Plot values
+plot1 = plot(series=fastMA, color=fastMA_color, linewidth=2)
+plot2 = plot(series=slowMA, color=slowMA_color, linewidth=2)
+
+color fill_ma = fastMA > slowMA ? fastMA_color : slowMA_color
+fill(plot1, plot2, color=fill_ma, title='Fill', transp=90)
+
